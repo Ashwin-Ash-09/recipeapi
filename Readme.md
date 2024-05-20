@@ -6,7 +6,7 @@ This project provides a Spring Boot powered REST API for managing recipes.
 
 - CRUD operations on recipes:
   - Create new recipes
-  - Get all recipes
+  - Get all recipes (name, id and description only)
   - Get a recipe by ID
   - Update an existing recipe
   - Delete a recipe
@@ -14,12 +14,13 @@ This project provides a Spring Boot powered REST API for managing recipes.
 **Technologies Used:**
 
 - Spring Boot
-- Spring MVC
+- Spring DATA JPA
 
 **Dependencies:**
 
 - Spring Web
-- (Add any other relevant dependencies here)
+- MySQL Connector
+- Lombok
 
 **Setup:**
 
@@ -67,9 +68,7 @@ The request body should be a JSON object representing the recipe data. Here's an
 		"recipeID": 2,
 		"name": "Double Chocolate Fudge Cake",
 		"description": "A rich and decadent chocolate cake with a smooth ganache frosting.",
-		"steps": "1. Preheat oven to 350°F (175°C). 2. Cream butter and sugar together.
-         3. Add eggs one at a time, then mix in dry ingredients. 4. Pour batter into greased pan and bake for 30-35 minutes. 
-         5. While cake cools, prepare ganache by heating cream and pouring it over chocolate. 6. Frost cake once cool."
+		"steps": " 1. Preheat oven to 350°F (175°C). 2. Cream butter and sugar together.3. Add eggs one at a time, then mix in dry ingredients. 4. Pour batter into greased pan and bake for 30-35 minutes. 5. While cake cools, prepare ganache by heating cream and pouring it over chocolate. 6. Frost cake once cool."
 	}
 }
 ```
@@ -92,7 +91,7 @@ curl http://localhost:8080/recipes
 **Create a new recipe:**
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d '{ "name": "My Recipe", "description": "This is a delicious recipe" }' http://localhost:8080/recipes
+curl -X POST -H "Content-Type: application/json" -d '{"recipe": { "name": "recipe name","description": "recipe description","steps":"steps"}}' http://localhost:8080/recipes
 ```
 
 **Get a recipe by ID:**
@@ -104,7 +103,7 @@ curl http://localhost:8080/recipes/1
 **Update a recipe:**
 
 ```bash
-curl -X PUT -H "Content-Type: application/json" -d '{ "name": "Updated Recipe", "description": "This recipe has been updated" }' http://localhost:8080/recipes/1
+curl -X PUT -H "Content-Type: application/json" -d'{"recipe": { "name": "updated recipe name","description": "updated recipe description","steps":"updated steps"}} http://localhost:8080/recipes/1
 ```
 
 **Delete a recipe:**
@@ -117,4 +116,4 @@ curl -X DELETE http://localhost:8080/recipes/1
 
 - This is a basic example and may require customization for specific needs.
 - Error handling is omitted for brevity. Consider implementing proper error handling for a production environment.
-- Security considerations are not addressed in this example. For a production deployment, implement security measures to protect your API.
+- Security considerations are not addressed in this example. For a production deployment, implement security measures to protect API.
